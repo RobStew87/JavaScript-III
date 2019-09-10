@@ -38,11 +38,88 @@
   * Instances of Humanoid should have all of the same properties as CharacterStats and GameObject.
   * Instances of CharacterStats should have all of the same properties as GameObject.
 */
+// CONSTRUCTOR FUNCTIONS
 
+function GameObject(attr) {
+  this.createdAt = attr.createdAt;
+  this.name = attr.name;
+  this.dimensions = attr.dimensions;
+}
+
+function CharacterStats(attr) {
+  GameObject.call(this, attr);
+  this.healthPoints = attr.healthPoints;
+}
+
+function Humanoid(attr) {
+  CharacterStats.call(this, attr);
+  this.team = attr.team;
+  this.weapons = attr.weapons;
+  this.language = attr.language;
+}
+
+// PROTOTYPE INHERITANCES
+
+CharacterStats.prototype = Object.create(GameObject.prototype)
+Humanoid.prototype = Object.create(CharacterStats.prototype)
+
+// PROTOTYPE METHODS
+
+GameObject.prototype.destroy = function () {
+  return `${this.name} was removed from the game.`;
+}
+CharacterStats.prototype.takeDamage = function () {
+  return `${this.name} took damage`;
+}
+Humanoid.prototype.greet = function () {
+  return `${this.name} offers a greeting in ${this.language}`;
+}
 // Test you work by un-commenting these 3 objects and the list of console logs below:
 
-/*
-  const mage = new Humanoid({
+
+  function GameObject(attrs){
+  this.createdAt= attrs.createdAt;
+  this.name = attrs.name;
+  this.dimensions= attrs.dimensions;
+};
+ GameObject.prototype.destroy = function(){
+   return `${this.name} was removed from the game.`;
+ };
+
+
+//=============================================================================================================
+function CharacterStats(charAttrs){
+  GameObject.call(this, charAttrs);
+  this.healthPoints = charAttrs.healthPoints;
+  };
+
+  CharacterStats.prototype = Object.create(GameObject.prototype);
+
+  CharacterStats.prototype.takeDamage =function(){
+  return `${this.name} took damage.`;
+};
+
+
+//===============================================================================================================
+   function Humanoid(humAttrs){
+     CharacterStats.call(this, humAttrs);
+     this.team = humAttrs.team;
+     this.weapons = humAttrs.weapons;
+     this.language = humAttrs.language;
+
+   };
+  Humanoid.prototype = Object.create(CharacterStats.prototype);
+
+  Humanoid.prototype.greet = function(){
+  return `${this.name} offers a greeting in ${this.language}.`;
+  };
+
+
+//===============================================================================================================
+
+
+
+const mage = new Humanoid({
     createdAt: new Date(),
     dimensions: {
       length: 2,
@@ -57,7 +134,6 @@
     ],
     language: 'Common Tongue',
   });
-
   const swordsman = new Humanoid({
     createdAt: new Date(),
     dimensions: {
@@ -74,7 +150,6 @@
     ],
     language: 'Common Tongue',
   });
-
   const archer = new Humanoid({
     createdAt: new Date(),
     dimensions: {
@@ -90,8 +165,7 @@
       'Dagger',
     ],
     language: 'Elvish',
-  });
-
+  }); 
   console.log(mage.createdAt); // Today's date
   console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
   console.log(swordsman.healthPoints); // 15
@@ -102,9 +176,49 @@
   console.log(archer.greet()); // Lilith offers a greeting in Elvish.
   console.log(mage.takeDamage()); // Bruce took damage.
   console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
-*/
-
+  
   // Stretch task: 
   // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
   // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
   // * Create two new objects, one a villain and one a hero and fight it out with methods!
+  
+  const villain = new Humanoid({
+    createdAt: new Date(),
+    dimensions: {
+      length: 2,
+      width: 4,
+      height: 15,
+    },
+    healthPoints: 500,
+    name: 'Shrapnel',
+    team: 'The Black Hand ',
+    weapons: [
+      'smoldering cannon',
+      'large greataxe',
+    ],
+    language: 'Common Tongue',
+  });
+
+
+
+
+
+
+  const hero = new Humanoid({
+    createdAt: new Date(),
+    dimensions: {
+      length: 3,
+      width: 4,
+      height: 7,
+    },
+    healthPoints: 45,
+    name: 'Alf',
+    team: 'Order of Light',
+    weapons: [
+      'zweihander',
+
+    ],
+    language:'Common Tongue',
+  });
+ 
+  console.log(hero.weapons);
