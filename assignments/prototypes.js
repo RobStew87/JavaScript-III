@@ -76,7 +76,7 @@ Humanoid.prototype.greet = function () {
 }
 // Test you work by un-commenting these 3 objects and the list of console logs below:
 
-/*
+
   function GameObject(attrs){
   this.createdAt= attrs.createdAt;
   this.name = attrs.name;
@@ -149,7 +149,7 @@ const mage = new Humanoid({
       'Shield',
     ],
     language: 'Common Tongue',
-  };
+  });
   const archer = new Humanoid({
     createdAt: new Date(),
     dimensions: {
@@ -165,7 +165,7 @@ const mage = new Humanoid({
       'Dagger',
     ],
     language: 'Elvish',
-  };
+  }); 
   console.log(mage.createdAt); // Today's date
   console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
   console.log(swordsman.healthPoints); // 15
@@ -213,12 +213,12 @@ const mage = new Humanoid({
     },
     healthPoints: 45,
     name: 'Alf',
-    team: 'Knights of Order',
+    team: 'Order of Light',
     weapons: [
       'zweihander',
 
     ],
     language:'Common Tongue',
-  };
-
-  console.log(hero.weapons); 
+  });
+ 
+  console.log(hero.weapons);
